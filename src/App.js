@@ -11,7 +11,7 @@ const App = () => {
   useEffect(() => {
       dispatch({
         type: actionTypes.SET_USER,
-        user: JSON.parse(localStorage.getItem('twittie_user'))
+        user: JSON.parse(localStorage.getItem('twitter_user'))
       })    
   }, [])
 

@@ -46,11 +46,11 @@ const Login = () => {
     const auths = (user) => {
         try {
             user.password = undefined
-            localStorage.setItem('twittie_user', JSON.stringify(user))
+            localStorage.setItem('twitter_user', JSON.stringify(user))
             
             dispatch({
                 type: actionTypes.SET_USER,
-                user : JSON.parse(localStorage.getItem('twittie_user'))
+                user : JSON.parse(localStorage.getItem('twitter_user'))
             })
             
             setLoading(false)          
