@@ -5,7 +5,7 @@ import db from '../../firebase'
 import './UserItem.css'
 import {useStateValue} from '../../contexts/StateContextProvider'
 
-const UserExist = ({roomId, members, clicked}) => {
+const UserExist = ({members}) => {
     const [{user}] = useStateValue()
     const [opp, setOpp] = useState('')
     const [userInfo, setUserInfo] = useState(null)
