@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {BrowserRouter as Router , Route} from 'react-router-dom'
+import {BrowserRouter as Router , Route , Switch} from 'react-router-dom'
 import Login from './components/Login/Login'
 import './App.css'
 import {useStateValue} from './contexts/StateContextProvider'
@@ -7,6 +7,8 @@ import {actionTypes} from './contexts/StateReducers'
 import Feed from './components/Feed/Feed'
 import Sidebar from './components/Sidebar/Sidebar';
 import Widgets from './components/Widgets/Widgets';
+import  Profile  from './components/Profile/Profile'
+import ProfileFollow from './components/ProfileFollow/ProfileFollow'
 
 const App = () => {
   const [{user}, dispatch] = useStateValue()
@@ -26,13 +28,16 @@ const App = () => {
         <div className='app__mainContent'>
 
             <Sidebar />
-            <Feed />
-            <Widgets />
-            {/* <Route exact path='/'>
+            <Route path='/' exact component={Feed} />
+            <Route path='/profile/:username' >
                 <div className="app__main">
-                  <Feed />
+                  <Switch>
+                    <Route path='/profile/:username' exact component={Profile} />
+                    <Route path='/profile/:username/followinfo' render={()=> <ProfileFollow />} />
+                  </Switch>
                 </div>         
-            </Route> */}
+            </Route>            <Widgets />
+            
         </div>
      
           

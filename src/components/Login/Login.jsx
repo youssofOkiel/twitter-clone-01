@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import firebase from 'firebase'
-import backdrop from '../../assets/backdrop.png'
+import backdrop from '../../assets/backLogin.png'
 import './Login.css'
 import Spinner from '../elements/Spinner/Spinner'
 
