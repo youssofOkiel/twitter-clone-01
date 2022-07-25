@@ -21,7 +21,6 @@ const SidebarAccount = () => {
 
     const signout = () => {
         localStorage.clear()
-        // window.location.push('/')
         history.push('/')
         window.location.reload()
     }
