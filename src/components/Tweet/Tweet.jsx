@@ -188,7 +188,7 @@ const Tweet = forwardRef(
               </div>
             </div>
 
-            {image.length > 0 && <img src={image} alt={altText} />}
+            {image.length > 0 && <img src={require(`../../${image}`)} alt={altText} />}
 
             <div className="post__footer"></div>
           </div>

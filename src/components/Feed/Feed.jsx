@@ -5,6 +5,7 @@ import Loader from "../elements/Loader/Loader";
 import "./Feed.css";
 import { useStateValue } from "../../contexts/StateContextProvider";
 import Tweets from "../Tweets/Tweets";
+import TweetBox from "../TweetBox/TweetBox";
 
 const Feed = () => {
   const [{ user }] = useStateValue();
@@ -53,6 +54,7 @@ const Feed = () => {
         <h2>Home</h2>
       </div>
 
+      <TweetBox/>    
       {loading && (
         <div className="feed__loader">
           <Loader />

@@ -1,20 +1,22 @@
 import React, {useState, useEffect} from 'react'
 import {useHistory, useParams} from 'react-router'
-// import Posts from '../Posts/Posts'
+import Tweets from '../Tweets/Tweets'
 import TabbarMenu from '../elements/TabbarMenu/TabbarMenu'
 import ProfileTheme from '../ProfileTheme/ProfileTheme'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined'
 import Loader from '../elements/Loader/Loader'
 
+
+
 import db from '../../firebase'
-// import {useStateValue} from '../../contexts/StateContextProvider'
 import '../Feed/Feed.css'
+
 
 const Profile = () => {
     const {username} = useParams()  
     const history = useHistory()    
-    const [posts, setPosts] = useState([])
+    const [tweets, setTweets] = useState([])
     const [loading, setLoading] = useState(false)
     const initProfile={
         bio:'',
@@ -47,7 +49,7 @@ const Profile = () => {
         .where('senderId', '==', profile.id)
         .orderBy('timestamp', 'desc')
         .onSnapshot(snapshot=> {
-          setPosts(snapshot.docs.map(doc => ({id:doc.id, ...doc.data()})))
+          setTweets(snapshot.docs.map(doc => ({id:doc.id, ...doc.data()})))
           setLoading(false)
         })
       }
@@ -59,27 +61,17 @@ const Profile = () => {
             title:'Tweets',
             item: <>
                     { loading && <div className="feed__loader"><Loader/></div> } 
-                    {/* <Posts  posts={posts} /> */}
+                    <Tweets  tweets={tweets} />
                   </>
         },
+
+     
         {
             id: 1,
-            title: 'Tweets & replies',
-            item: <>  { loading && <div className="feed__loader"><Loader/></div> } </>
-        },
-        {
-            id: 2,
-            title: 'Media',
-            item: <>
-                    { loading && <div className="feed__loader"><Loader/></div> } 
-                    {/* <Posts  posts={posts.filter(post=>post.image.length>0)} /> */}
-                  </>
-        },        
-        {
-            id: 3,
             title: 'Likes',
             item: <> { loading && <div className="feed__loader"><Loader/></div> } </>
         }
+      
     ]
 
     return (
@@ -90,7 +82,7 @@ const Profile = () => {
               </div>
               <div className='profile__title'>
                 <div className='profile__title_title'><h2>{profile && profile.displayName}</h2><CheckCircleIcon /></div>        
-                <span>{posts && posts.length} tweets</span>
+                <span>{tweets && tweets.length} tweets</span>
               </div>
            </div>
 
