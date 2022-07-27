@@ -1,19 +1,15 @@
 .feed {
-    /* flex: 0.6; */
     flex: 1;
     border-right: 1px solid var(--twittie-background);
-    /* min-width: fit-content; */
     overflow-y: scroll;
-
-    /* hide scrollbar for IE, edge, firefox */
-    -ms-overflow-style: none; /*ie, edge*/
-    scrollbar-width: none; /*firefox*/
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
 }
 
 .feed__header{
     position: sticky;
     top: 0;
-    background-color: white;
+    backdrop-filter: blur(25px);
     z-index: 100;
     border-bottom: 1px solid var(--twittie-background);
     padding: 1.5rem 2rem;
@@ -40,7 +36,6 @@
     justify-content: center !important;
 }
 
-/* hide scrollbar for chrome, safari, and opera */
 .feed::-webkit-scrollbar{
     display: none;
 }

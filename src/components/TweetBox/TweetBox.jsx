@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Avatar, Button } from "@material-ui/core";
 import { useStateValue } from "../../contexts/StateContextProvider";
 import db from "../../firebase";
-import firebase from "firebase";
 import "./TweetBox.css";
 
 import Popover from "@material-ui/core/Popover";
@@ -14,6 +13,7 @@ import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfie
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 
 const TweetBox = () => {
+  const d = new Date();
   const [{ user }] = useStateValue();
   const [profile, setProfile] = useState(null);
   const [tweetMessage, setTweetMessage] = useState("");
@@ -40,7 +40,7 @@ const TweetBox = () => {
         image: `assets/${imageToSend}`,
         likes: [],
         senderId: user.id,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        timestamp: d.toLocaleString(),
       });
 
       setTweetMessage("");
@@ -52,7 +52,7 @@ const TweetBox = () => {
         image: "",
         likes: [],
         senderId: user.id,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        timestamp: d.toLocaleString(),
       });
 
       setTweetMessage("");

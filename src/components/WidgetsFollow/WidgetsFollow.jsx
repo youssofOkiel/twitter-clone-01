@@ -27,7 +27,7 @@ const WidgetFollow = () => {
            <div className="widgets__widgetContainer">
               <h2>Who to follow</h2>
 
-              <ul className='widgets__trendsContainer'>
+              <ul>
 
               {
                     users.filter(u=> u.id!==user.id).map(user=> {

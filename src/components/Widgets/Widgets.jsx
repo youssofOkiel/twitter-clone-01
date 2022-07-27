@@ -7,7 +7,6 @@ const Widgets = () => {
     return (
         <div className='widgets'>
 
-            
             <WidgetsFollow />
 
         </div>

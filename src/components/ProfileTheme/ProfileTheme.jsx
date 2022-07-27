@@ -9,6 +9,7 @@ import { useStateValue } from "../../contexts/StateContextProvider";
 import { follow, unfollow } from "../../server/serverActions";
 
 import "./ProfileTheme.css";
+import { Avatar } from "@material-ui/core";
 
 const ProfileTheme = () => {
   const [profile, setProfile] = useState({
@@ -55,9 +56,11 @@ const ProfileTheme = () => {
           style={{ backgroundImage: `url(${profile && profile.wallpaper})` }}
         >
           <div className="photoWrapper">
-            {profile && profile.photoURL && (
+            {profile.photoURL != "" ?
               <img src={profile.photoURL} alt={`${profile.displayName}`} />
-            )}
+            : <Avatar style={{width:'14rem' , height:'14rem'}} src={profile.photoURL} />
+            }
+           
           </div>
         </div>
 
