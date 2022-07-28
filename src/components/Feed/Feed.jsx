@@ -10,7 +10,7 @@ import TweetBox from "../TweetBox/TweetBox";
 const Feed = () => {
   const [{ user }] = useStateValue();
   const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
   const [following, setFollowing] = useState([]);
 
@@ -53,8 +53,7 @@ const Feed = () => {
         </div>
         <h2>Home</h2>
       </div>
-
-      <TweetBox/>    
+      <TweetBox />
       {loading && (
         <div className="feed__loader">
           <Loader />

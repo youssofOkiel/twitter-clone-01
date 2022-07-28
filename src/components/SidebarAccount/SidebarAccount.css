@@ -22,7 +22,7 @@
 }
 
 .sidebarAccount__userData h2:nth-child(2){
-    color: var(--twittie-light);
+    color: var(--twitter-light);
     font-weight: 450;
 }
 

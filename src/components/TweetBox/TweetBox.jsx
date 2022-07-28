@@ -11,6 +11,7 @@ import Spinner from "../elements/Spinner/Spinner";
 
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
+import Image from "../../helpers/uploadCloudImage";
 
 const TweetBox = () => {
   const d = new Date();
@@ -34,17 +35,25 @@ const TweetBox = () => {
     setIsloading(true);
 
     if (imageToSend !== "") {
-      db.collection("posts").add({
-        altText: imageToSend,
-        text: tweetMessage,
-        image: `assets/${imageToSend}`,
-        likes: [],
-        senderId: user.id,
-        timestamp: d.toLocaleString(),
-      });
+      console.log("imageToSend", imageToSend);
+      Image(imageToSend)
+        .then((res) => {
+          db.collection("posts").add({
+            altText: "hi",
+            text: tweetMessage,
+            image: res,
+            likes: [],
+            senderId: user.id,
+            timestamp: d.toLocaleString(),
+          });
 
-      setTweetMessage("");
-      setIsloading(false);
+          setTweetMessage("");
+          setIsloading(false);
+        })
+        .catch((err) => {
+          setIsloading(false);
+          return;
+        });
     } else {
       db.collection("posts").add({
         altText: "no_images",
@@ -61,7 +70,9 @@ const TweetBox = () => {
   };
 
   const onSelectFile = (e) => {
-    setImageToSend(e.target.value.split("\\")[2]);
+    var image = e.target.files[0];
+    setImageToSend(image);
+    // setImageToSend(e.target.value.split("\\")[2]);
   };
 
   const open = Boolean(anchorEl);
@@ -139,8 +150,6 @@ const TweetBox = () => {
                   >
                     <Picker onEmojiClick={onEmojiClick} />
                   </Popover>
-
-                  {/* <Input Icon={EventNoteSharpIcon} /> */}
                 </div>
 
                 {isLoading ? (

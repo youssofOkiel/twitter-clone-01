@@ -7,7 +7,6 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import db from "../../firebase";
 import { useStateValue } from "../../contexts/StateContextProvider";
 import { follow, unfollow } from "../../server/serverActions";
-
 import "./ProfileTheme.css";
 import { Avatar } from "@material-ui/core";
 
@@ -24,7 +23,7 @@ const ProfileTheme = () => {
 
   const [{ user }] = useStateValue();
   const { username } = useParams();
-  let isMe = (profile && profile.id) === user.id ? true : false;
+  let isMe = profile.id === user.id ? true : false;
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
@@ -56,11 +55,14 @@ const ProfileTheme = () => {
           style={{ backgroundImage: `url(${profile && profile.wallpaper})` }}
         >
           <div className="photoWrapper">
-            {profile.photoURL != "" ?
+            {profile.photoURL !== "" ? (
               <img src={profile.photoURL} alt={`${profile.displayName}`} />
-            : <Avatar style={{width:'14rem' , height:'14rem'}} src={profile.photoURL} />
-            }
-           
+            ) : (
+              <Avatar
+                style={{ width: "14rem", height: "14rem" }}
+                src={profile.photoURL}
+              />
+            )}
           </div>
         </div>
 

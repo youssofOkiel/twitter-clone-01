@@ -1,6 +1,6 @@
 * {
     margin: 0;
-
+    text-decoration: none;
 }
 
 html{
@@ -9,14 +9,14 @@ html{
 }
 
 :root{
-    --twittie-color: #50b7f5;
-    --twittie-darker-color: #1da1f2;
-    --twittie-background: #e6ecf0;
-    --twittie-background-2: #f5f8fa;
-    --twittie-light: rgb(101, 119,134);
-    --twittie-hover: #e8f5fe;
-    --twittie-hover-2: #ebebeb;
-    --twittie-red: rgb(224, 36, 94); 
+    --twitter-color: #50b7f5;
+    --twitter-darker-color: #1da1f2;
+    --twitter-background: #e6ecf0;
+    --twitter-background-2: #f5f8fa;
+    --twitter-light: rgb(101, 119,134);
+    --twitter-hover: #e8f5fe;
+    --twitter-hover-2: #ebebeb;
+    --twitter-red: rgb(224, 36, 94); 
 }
 
 .app{
@@ -51,7 +51,7 @@ html{
 }
 
 .MuiCircularProgress-colorPrimary{
-    color: var(--twittie-color) !important;
+    color: var(--twitter-color) !important;
 }
 
 .app__main{
@@ -65,7 +65,7 @@ html{
 }
 
 .emoji-picker-react input.emoji-search{
-    border: 2px solid var(--twittie-color) !important;
+    border: 2px solid var(--twitter-color) !important;
     border-radius: 3rem;
 }
 

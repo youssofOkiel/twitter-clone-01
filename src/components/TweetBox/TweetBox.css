@@ -1,6 +1,6 @@
 .tweetBox {
     padding-bottom: 1rem;
-    border-bottom: .8rem solid var(--twittie-background);
+    border-bottom: .8rem solid var(--twitter-background);
     padding-right: 1rem;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .tweetBox__tweetButton{
-    background-color: var(--twittie-color) !important;
+    background-color: var(--twitter-color) !important;
     border: none !important;
     color: white !important;
     font-weight: 900 !important;
@@ -148,7 +148,7 @@
 
 .tweetBox__input-icons .MuiSvgIcon-root{
     font-size: 2rem;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
     cursor: pointer;
 }
 

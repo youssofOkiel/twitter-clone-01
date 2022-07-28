@@ -1,13 +1,11 @@
 import React, { useState, forwardRef, useEffect } from "react";
 import { Avatar } from "@material-ui/core";
 import Popover from "@material-ui/core/Popover";
-import Modal from "../elements/Modal/Modal";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import CloseIcon from "@material-ui/icons/Close";
 import "./Tweet.css";
 import db from "../../firebase";
 import { useStateValue } from "../../contexts/StateContextProvider";
@@ -15,15 +13,13 @@ import { follow, unfollow, deletePost } from "../../server/serverActions";
 import TweetPostTime from "../../helpers/timeHandle";
 
 const Tweet = forwardRef(
-  ({ altText, text, image, timestamp, senderId, postId, likes }, ref) => {
+  ({ altText, text, image, timestamp, senderId, postId }, ref) => {
     const d = new Date();
     const [anchorEl, setAnchorEl] = useState(null);
     const onClickExpand = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
     const open = Boolean(anchorEl);
     const id = open ? "post-popover" : undefined;
-    const [isOpenModal, setIsOpenModal] = useState(false);
-
     const [{ user }] = useStateValue();
     const [profile, setProfile] = useState({
       id: "",
@@ -34,11 +30,7 @@ const Tweet = forwardRef(
       followers: [],
       following: [],
     });
-
-    
-
     const { displayName, username, photoURL, verified } = profile;
-
     const [isFollowing, setIsFollowing] = useState(false);
 
     useEffect(() => {
@@ -54,8 +46,6 @@ const Tweet = forwardRef(
         setIsFollowing(profile.followers.includes(user.id));
       }
     }, [profile]);
-
-    const callbackForModal = () => {};
 
     return (
       <>
@@ -138,7 +128,7 @@ const Tweet = forwardRef(
             </div>
 
             {image.length > 0 && (
-              <img src={require(`../../${image}`)} alt={altText} />
+              <img src={image} alt={altText} />
             )}
 
             <div className="post__footer"></div>
