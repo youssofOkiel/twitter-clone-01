@@ -7,14 +7,14 @@
 }
 
 .sidebarOption:hover{
-    background-color: var(--twittie-hover);
+    background-color: var(--twitter-hover);
     border-radius: 3rem;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
     transition: color 100ms ease-out;
 }
 
 .sidebar__active{
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }
 
 .sidebarOption>h2{

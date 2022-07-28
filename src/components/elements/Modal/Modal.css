@@ -9,7 +9,7 @@
     padding: 1.5rem;
     font-size: 1rem;
     border-radius: 50%;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }
 
 .backIcon:hover{
@@ -23,7 +23,7 @@
 }
 
 .modal__header .MuiButton-root{
-    background-color: var(--twittie-color);
+    background-color: var(--twitter-color);
     border-radius: 2rem;
     color: white;
     font-size: 1.4rem;

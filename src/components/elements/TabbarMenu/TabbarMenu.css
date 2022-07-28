@@ -19,15 +19,15 @@
 }
 
 .tabbarMenu .MuiTab-textColorPrimary.Mui-selected{
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }
 
 .tabbarMenu .PrivateTabIndicator-root{
-    background-color: var(--twittie-color);
+    background-color: var(--twitter-color);
 }
 
 .tabbarMenu .MuiTabs-indicator{
-    background-color: var(--twittie-color);
+    background-color: var(--twitter-color);
 }
 
 .tabbarMenu .react-swipeable-view-container .MuiBox-root-6{

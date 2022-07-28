@@ -20,10 +20,10 @@
 
 .user__details>span{
     font-size: 1.1rem;
-    color: var(--twittie-light);
+    color: var(--twitter-light);
 }
 
 .user__item .MuiSvgIcon-root{
     padding: 1rem;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }

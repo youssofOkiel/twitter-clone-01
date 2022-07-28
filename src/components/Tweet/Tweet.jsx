@@ -1,35 +1,25 @@
 import React, { useState, forwardRef, useEffect } from "react";
 import { Avatar } from "@material-ui/core";
 import Popover from "@material-ui/core/Popover";
-import Modal from "../elements/Modal/Modal";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import CodeIcon from "@material-ui/icons/Code";
-import PlaceIcon from "@material-ui/icons/Place";
-import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
-import BlockIcon from "@material-ui/icons/Block";
-import PostAddIcon from "@material-ui/icons/PostAdd";
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import CloseIcon from "@material-ui/icons/Close";
 import "./Tweet.css";
 import db from "../../firebase";
 import { useStateValue } from "../../contexts/StateContextProvider";
 import { follow, unfollow, deletePost } from "../../server/serverActions";
+import TweetPostTime from "../../helpers/timeHandle";
 
 const Tweet = forwardRef(
-  ({ altText, text, image, timestamp, senderId, postId, likes }, ref) => {
-    const date = timestamp; //from helpers
-
+  ({ altText, text, image, timestamp, senderId, postId }, ref) => {
+    const d = new Date();
     const [anchorEl, setAnchorEl] = useState(null);
     const onClickExpand = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
     const open = Boolean(anchorEl);
     const id = open ? "post-popover" : undefined;
-    const [isOpenModal, setIsOpenModal] = useState(false);
-
     const [{ user }] = useStateValue();
     const [profile, setProfile] = useState({
       id: "",
@@ -41,7 +31,6 @@ const Tweet = forwardRef(
       following: [],
     });
     const { displayName, username, photoURL, verified } = profile;
-
     const [isFollowing, setIsFollowing] = useState(false);
 
     useEffect(() => {
@@ -58,19 +47,8 @@ const Tweet = forwardRef(
       }
     }, [profile]);
 
-    const callbackForModal = () => {};
-
     return (
       <>
-        <Modal
-          open={isOpenModal}
-          onClose={() => setIsOpenModal(false)}
-          title=""
-          callback={callbackForModal}
-          Icon={CloseIcon}
-          ButtonText=""
-        ></Modal>
-
         <div className="post" ref={ref}>
           <div className="post__avatar">
             <Avatar src={photoURL} />
@@ -82,7 +60,10 @@ const Tweet = forwardRef(
                   {displayName}{" "}
                   <span className="post__headerSpecial">
                     {verified && <VerifiedUserIcon className="post__badge" />}@
-                    {`${username} . ${timestamp && date}`}
+                    {`${username} . ${TweetPostTime(
+                      timestamp,
+                      d.toLocaleString()
+                    )}`}
                   </span>
                 </h3>
                 <div
@@ -117,33 +98,9 @@ const Tweet = forwardRef(
                           </div>
                           <h3 className="delete">Delete</h3>
                         </li>
-                        <li>
-                          <div>
-                            <PlaceIcon />
-                          </div>
-                          <h3>Pin to your profile</h3>
-                        </li>
-                        <li>
-                          <div>
-                            <CodeIcon />
-                          </div>
-                          <h3>Embed Tweet</h3>
-                        </li>
-                        <li>
-                          <div>
-                            <BarChartIcon />
-                          </div>
-                          <h3>View Tweet activity</h3>
-                        </li>
                       </>
                     ) : (
                       <>
-                        <li>
-                          <div>
-                            <SentimentVeryDissatisfiedIcon />
-                          </div>
-                          <h3>Not interested in this tweet</h3>
-                        </li>
                         {isFollowing ? (
                           <li onClick={() => unfollow(user.id, senderId)}>
                             <div>
@@ -159,24 +116,6 @@ const Tweet = forwardRef(
                             <h3>Follow {`@${username}`}</h3>
                           </li>
                         )}
-                        <li>
-                          <div>
-                            <PostAddIcon />
-                          </div>
-                          <h3>Add/remove from Lists</h3>
-                        </li>
-                        <li>
-                          <div>
-                            <BlockIcon />
-                          </div>
-                          <h3>Block {`@${username}`}</h3>
-                        </li>
-                        <li>
-                          <div>
-                            <CodeIcon />
-                          </div>
-                          <h3>Embed Tweet</h3>
-                        </li>
                       </>
                     )}
                   </ul>
@@ -188,7 +127,9 @@ const Tweet = forwardRef(
               </div>
             </div>
 
-            {image.length > 0 && <img src={image} alt={altText} />}
+            {image.length > 0 && (
+              <img src={image} alt={altText} />
+            )}
 
             <div className="post__footer"></div>
           </div>

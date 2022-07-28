@@ -1,0 +1,6 @@
+.widgets__widgetContainer {
+    margin: .7rem 1rem 1.5rem 2rem;
+    padding: 2rem;
+    background-color: var(--twitter-background-2);
+    border-radius: 2rem;
+}

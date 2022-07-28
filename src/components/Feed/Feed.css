@@ -1,21 +1,17 @@
 .feed {
-    /* flex: 0.6; */
     flex: 1;
-    border-right: 1px solid var(--twittie-background);
-    /* min-width: fit-content; */
+    border-right: 1px solid var(--twitter-background);
     overflow-y: scroll;
-
-    /* hide scrollbar for IE, edge, firefox */
-    -ms-overflow-style: none; /*ie, edge*/
-    scrollbar-width: none; /*firefox*/
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
 }
 
 .feed__header{
     position: sticky;
     top: 0;
-    background-color: white;
+    backdrop-filter: blur(25px);
     z-index: 100;
-    border-bottom: 1px solid var(--twittie-background);
+    border-bottom: 1px solid var(--twitter-background);
     padding: 1.5rem 2rem;
     display: flex;
     flex-direction: row;
@@ -40,7 +36,6 @@
     justify-content: center !important;
 }
 
-/* hide scrollbar for chrome, safari, and opera */
 .feed::-webkit-scrollbar{
     display: none;
 }
@@ -50,7 +45,7 @@
     top: 0;
     background-color: white;
     z-index: 100;
-    border-bottom: 1px solid var(--twittie-background);
+    border-bottom: 1px solid var(--twitter-background);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -72,12 +67,12 @@
 }
 
 .profile__backArrow:hover{
-    background: var(--twittie-hover);
+    background: var(--twitter-hover);
 }
 
 .profile__header .MuiSvgIcon-root{
     font-size: 2.5rem;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }
 
 .profile__title{
@@ -99,7 +94,7 @@
 
 .profile__header span{
     font-size: 1.3rem;
-    color: var(--twittie-light);
+    color: var(--twitter-light);
 }
 
 
@@ -110,7 +105,7 @@
     top: 0;
     background-color: white;
     z-index: 100;
-    border-bottom: 1px solid var(--twittie-background);
+    border-bottom: 1px solid var(--twitter-background);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -129,12 +124,12 @@
 }
 
 .status__backArrow:hover{
-    background: var(--twittie-hover);
+    background: var(--twitter-hover);
 }
 
 .status__header .MuiSvgIcon-root{
     font-size: 2.5rem;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }
 
 .status__title{
@@ -156,7 +151,7 @@
 
 .status__header span{
     font-size: 1.3rem;
-    color: var(--twittie-light);
+    color: var(--twitter-light);
 }
 
 

@@ -1,7 +1,7 @@
 .post {
     display: flex;
     align-items: flex-start;
-    border-bottom: 1px solid var(--twittie-background);
+    border-bottom: 1px solid var(--twitter-background);
     padding-bottom: 1rem;
 }
 
@@ -44,7 +44,7 @@
 
 .post__badge{
     font-size: 1.4rem !important;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }
 
 .post__headerSpecial{
@@ -71,7 +71,7 @@
 
 .post__headerExpandIcon:hover{
     background: #e8f5fe;
-    color: var(--twittie-color);
+    color: var(--twitter-color);
 }
 
 .post__expandList{
@@ -100,7 +100,7 @@
 }
 
 .post__expandList li:hover{
-    background: var(--twittie-background-2) !important;
+    background: var(--twitter-background-2) !important;
 }
 
 .post__expandList li>h3{
@@ -118,11 +118,11 @@
 
 .post__replyingTo {
     font-size: 1.5rem;
-    color: var(--twittie-light);
+    color: var(--twitter-light);
 }
 
 .post__replyingTo>a{
-    color: var(--twittie-color)
+    color: var(--twitter-color)
 }
 
 .post__replyingTo>a:hover{
