@@ -46,3 +46,6 @@
 .userItemFollow--user__item .MuiAvatar-root{
     margin-right: 1.5rem;
 }
+.follow{
+    color: red;
+}

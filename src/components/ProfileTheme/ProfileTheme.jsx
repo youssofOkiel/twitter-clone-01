@@ -119,8 +119,7 @@ const ProfileTheme = () => {
             </Link>
             <Link to={`/profile/${username}/followinfo`}>
               <span>
-                {profile !== undefined && profile.followers.length}{" "}
-                <p>Followers</p>
+                {profile !== undefined && profile.followers.length}<p>Followers</p>
               </span>
             </Link>
           </div>

@@ -9,11 +9,12 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import "./Tweet.css";
 import db from "../../firebase";
 import { useStateValue } from "../../contexts/StateContextProvider";
-import { follow, unfollow, deletePost } from "../../server/serverActions";
+import { follow, unfollow, deletePost , like , unlike } from "../../server/serverActions";
 import TweetPostTime from "../../helpers/timeHandle";
+import Like from "../like/like";
 
 const Tweet = forwardRef(
-  ({ altText, text, image, timestamp, senderId, postId }, ref) => {
+  ({ altText, text, image, timestamp, senderId, postId , likes }, ref) => {
     const d = new Date();
     const [anchorEl, setAnchorEl] = useState(null);
     const onClickExpand = (event) => setAnchorEl(event.currentTarget);
@@ -131,7 +132,13 @@ const Tweet = forwardRef(
               <img src={image} alt={altText} />
             )}
 
-            <div className="post__footer"></div>
+            <div className="post__footer">
+            <Like 
+                        likes={likes}
+                        unlikeAction = {()=>unlike(postId, user.id)}
+                        likeAction = {()=>like(postId, user.id)}
+                  />
+            </div>
           </div>
         </div>
       </>
