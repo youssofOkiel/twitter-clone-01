@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useEffect } from "react";
 import { Avatar } from "@material-ui/core";
 import Popover from "@material-ui/core/Popover";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
@@ -12,6 +12,7 @@ import { useStateValue } from "../../contexts/StateContextProvider";
 import { follow, unfollow, deletePost , like , unlike } from "../../server/serverActions";
 import TweetPostTime from "../../helpers/timeHandle";
 import Like from "../like/like";
+import Replay from './../Replay/replay';
 
 const Tweet = forwardRef(
   ({ altText, text, image, timestamp, senderId, postId , likes }, ref) => {
@@ -60,7 +61,7 @@ const Tweet = forwardRef(
                 <h3>
                   {displayName}{" "}
                   <span className="post__headerSpecial">
-                    {verified && <VerifiedUserIcon className="post__badge" />}@
+                    {verified && <CheckCircleIcon className="post__badge" />}@
                     {`${username} . ${TweetPostTime(
                       timestamp,
                       d.toLocaleString()
@@ -139,6 +140,8 @@ const Tweet = forwardRef(
                         likeAction = {()=>like(postId, user.id)}
                   />
             </div>
+            <Replay />     
+
           </div>
         </div>
       </>
