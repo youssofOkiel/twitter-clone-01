@@ -3,7 +3,6 @@
     font-size: 1.4rem;
     display: flex;
     font-weight: 400;
-    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     color: var(--twittie-light);
@@ -16,13 +15,20 @@
     border-radius: 50%;
 }
 
-.footerIcon_wrapper .MuiSvgIcon-root:hover{
-    background-color: var(--twittie-background);
-}
 
-.footerIcon__counter{
+.like__counter{
     color: rgb(241, 0, 0);
     margin-left: 0.2rem;
+}
+
+.comment__counter{
+    color: var( --twitter-color);
+    margin-left: 0.3rem;
+}
+.comment{
+    margin-top: 5px;
+    color: var( --twitter-color);
+    margin-left: 5rem;
 }
 
 .liked .MuiSvgIcon-root{
@@ -34,4 +40,19 @@
 }
 .unliked{
     margin-top: 5px;
+}
+
+.comment__expandList li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.3rem;   
+    padding: 1.2rem; 
+    background: white;
+    min-width: 20rem;
+}
+
+.comment__expandList li:hover{
+    background: rgb(226, 244, 255);
+
 }

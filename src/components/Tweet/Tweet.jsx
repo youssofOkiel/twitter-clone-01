@@ -5,11 +5,11 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import "./Tweet.css";
+import { Link } from "react-router-dom";
 import db from "../../firebase";
 import { useStateValue } from "../../contexts/StateContextProvider";
-import { follow, unfollow, deletePost , like , unlike } from "../../server/serverActions";
+import { unfollow, deletePost , like , unlike } from "../../server/serverActions";
 import TweetPostTime from "../../helpers/timeHandle";
 import Like from "../like/like";
 import Replay from './../Replay/replay';
@@ -33,7 +33,7 @@ const Tweet = forwardRef(
       following: [],
     });
     const { displayName, username, photoURL, verified } = profile;
-    const [isFollowing, setIsFollowing] = useState(false);
+    const [comments , setComments] = useState([])
 
     useEffect(() => {
       db.collection("users")
@@ -44,10 +44,15 @@ const Tweet = forwardRef(
     }, []);
 
     useEffect(() => {
-      if (profile) {
-        setIsFollowing(profile.followers.includes(user.id));
-      }
-    }, [profile]);
+      db.collection("comments")
+      .where("tweetId", "==", postId)
+      .onSnapshot((snapshot) => {
+        setComments(
+          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        );
+      });
+    },[])
+
 
     return (
       <>
@@ -59,7 +64,7 @@ const Tweet = forwardRef(
             <div className="post__header">
               <div className="post__headerText">
                 <h3>
-                  {displayName}{" "}
+                <Link style={{color:'black',fontSize:'15px'}} to={`profile/${username}`}>{displayName}{" "}</Link>
                   <span className="post__headerSpecial">
                     {verified && <CheckCircleIcon className="post__badge" />}@
                     {`${username} . ${TweetPostTime(
@@ -103,21 +108,14 @@ const Tweet = forwardRef(
                       </>
                     ) : (
                       <>
-                        {isFollowing ? (
+                        
                           <li onClick={() => unfollow(user.id, senderId)}>
                             <div>
                               <PersonAddDisabledIcon />
                             </div>
                             <h3>Unfollow {`@${username}`}</h3>
                           </li>
-                        ) : (
-                          <li onClick={() => follow(user.id, senderId)}>
-                            <div>
-                              <PersonAddIcon />
-                            </div>
-                            <h3>Follow {`@${username}`}</h3>
-                          </li>
-                        )}
+                         
                       </>
                     )}
                   </ul>
@@ -135,13 +133,15 @@ const Tweet = forwardRef(
 
             <div className="post__footer">
             <Like 
+                        comments = {comments}
                         likes={likes}
                         unlikeAction = {()=>unlike(postId, user.id)}
                         likeAction = {()=>like(postId, user.id)}
                   />
             </div>
-            <Replay />     
-
+           
+            <Replay postId = {postId}/>     
+                
           </div>
         </div>
       </>
