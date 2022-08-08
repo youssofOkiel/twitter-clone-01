@@ -19,9 +19,16 @@ const TweetBox = () => {
   const [profile, setProfile] = useState(null);
   const [tweetMessage, setTweetMessage] = useState("");
   const [imageToSend, setImageToSend] = useState("");
-  const [anchorEl, setAnchorEl] = useState(null);
   const [isLoading, setIsloading] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl2, setAnchorEl2] = useState(null);
+  const handleClose = () => setAnchorEl(null);
+  const handleClose2 = () => setAnchorEl2(null);
 
+  const open = Boolean(anchorEl);
+  const open2 = Boolean(anchorEl2);
+  const id = open ? "post-popover" : undefined;
+  const id2 = open2 ? "post-popover" : undefined;
   useEffect(() => {
     db.collection("users")
       .doc(user.id)
@@ -32,54 +39,53 @@ const TweetBox = () => {
 
   const sendTweet = (e) => {
     e.preventDefault();
-    setIsloading(true);
-
-    if (imageToSend !== "") {
-      console.log("imageToSend", imageToSend);
-      Image(imageToSend)
-        .then((res) => {
-          db.collection("posts").add({
-            altText: "hi",
-            text: tweetMessage,
-            image: res,
-            likes: [],
-            senderId: user.id,
-            timestamp: d.toLocaleString(),
-          });
-
-          setTweetMessage("");
-          setIsloading(false);
-        })
-        .catch((err) => {
-          setIsloading(false);
-          return;
+if(tweetMessage.length > 0){
+  setIsloading(true);
+  if (imageToSend !== "") {
+    console.log("imageToSend", imageToSend);
+    Image(imageToSend)
+      .then((res) => {
+        db.collection("posts").add({
+          altText: "hi",
+          text: tweetMessage,
+          image: res,
+          likes: [],
+          senderId: user.id,
+          timestamp: d.toLocaleString(),
         });
-    } else {
-      db.collection("posts").add({
-        altText: "no_images",
-        text: tweetMessage,
-        image: "",
-        likes: [],
-        senderId: user.id,
-        timestamp: d.toLocaleString(),
-      });
 
-      setTweetMessage("");
-      setIsloading(false);
-    }
+        setTweetMessage("");
+        setIsloading(false);
+      })
+      .catch((err) => {
+        setIsloading(false);
+        return;
+      });
+  } else {
+    db.collection("posts").add({
+      altText: "no_images",
+      text: tweetMessage,
+      image: "",
+      likes: [],
+      senderId: user.id,
+      timestamp: d.toLocaleString(),
+    });
+
+    setTweetMessage("");
+    setIsloading(false);
+  }
+}else{
+  setAnchorEl2(e.currentTarget)
+}
+
   };
 
   const onSelectFile = (e) => {
     var image = e.target.files[0];
     setImageToSend(image);
-    // setImageToSend(e.target.value.split("\\")[2]);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "post-popover" : undefined;
   const onClickEmoticon = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-
   const onEmojiClick = (event, emojiObject) => {
     let newMessage = tweetMessage + emojiObject.emoji;
     setTweetMessage(newMessage);
@@ -132,7 +138,22 @@ const TweetBox = () => {
                     type="button"
                     onClick={onClickEmoticon}
                   />
-
+                  <Popover
+                    id={id2}
+                    open={open2}
+                    anchorEl={anchorEl2}
+                    onClose={handleClose2}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
+                    }}
+                  >
+                    <p className="warning__tweet">write your Tweet first</p>
+                  </Popover>
                   <Popover
                     id={id}
                     open={open}

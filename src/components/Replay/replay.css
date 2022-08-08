@@ -13,6 +13,16 @@
 .replayInput{
     width: 50rem;
 }
+.warning__comment{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.3rem;   
+    padding: 1.2rem; 
+    background: white;
+    min-width: 12.5rem;
+    color: rgb(148, 148, 148);
+}
 .replay input{
     overflow:hidden;
     max-width: 100%;

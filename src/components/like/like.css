@@ -40,6 +40,7 @@
 }
 .unliked{
     margin-top: 5px;
+    color: var(--twitter-color);
 }
 
 .comment__expandList li{

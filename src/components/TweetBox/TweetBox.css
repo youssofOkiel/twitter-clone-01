@@ -70,6 +70,17 @@
     color: inherit !important;
 }
 
+.warning__tweet{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.3rem;   
+    padding: 1.2rem; 
+    background: white;
+    min-width: 12.5rem;
+    color: rgb(148, 148, 148);
+}
+
 .tweetBox__imageInput{
     border: none;
     padding: 1rem;
