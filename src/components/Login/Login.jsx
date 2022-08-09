@@ -121,6 +121,7 @@ const Login = () => {
             rooms: [],
             username,
             verified: true,
+            is_active:true,
             wallpaper: "",
           })
           .then((snapshot) => {
