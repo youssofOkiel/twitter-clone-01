@@ -8,7 +8,13 @@ import db from "../../firebase";
 import { useStateValue } from "../../contexts/StateContextProvider";
 import { follow, unfollow } from "../../server/serverActions";
 import "./ProfileTheme.css";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Button, Divider } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+import Modal from "../elements/Modal/Modal";
+import StatusInput from "../StatusInput/StatusInput";
+import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
+import Image from "../../helpers/uploadCloudImage";
+import { DropzoneArea } from "material-ui-dropzone";
 
 const ProfileTheme = () => {
   const [profile, setProfile] = useState({
@@ -25,6 +31,9 @@ const ProfileTheme = () => {
   const { username } = useParams();
   let isMe = profile.id === user.id ? true : false;
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [imageToSend, setImageToSend] = useState("");
+  const [wallpaperToSend, setWallpaperToSend] = useState("");
 
   useEffect(() => {
     db.collection("users")
@@ -47,8 +56,74 @@ const ProfileTheme = () => {
     }
   }, [profile]);
 
+  const callbackforModal = () => {};
+
+  const onSelectFile = (e) => {
+    var image = e[0];
+    setImageToSend(image);
+  };
+  const onSelectWallpaper = (e) => {
+    var image = e[0];
+    setWallpaperToSend(image);
+  };
+
+  useEffect(() => {
+    if (wallpaperToSend !== "") {
+      Image(wallpaperToSend)
+        .then((res) => {
+          console.log("res", res);
+          db.collection("users").doc(user.id).update({
+            wallpaper: res,
+          });
+          console.log("res", res);
+          console.log("updated");
+        })
+        .catch((err) => {
+          console.log("not updated");
+          return;
+        });
+    }
+
+    if (imageToSend !== "") {
+      Image(imageToSend)
+        .then((res) => {
+          console.log("res", res);
+          db.collection("users").doc(user.id).update({
+            photoURL: res,
+            wallpaper: res,
+          });
+          console.log("res", res);
+          console.log("updated");
+        })
+        .catch((err) => {
+          console.log("not updated");
+          return;
+        });
+    }
+  }, [imageToSend, wallpaperToSend]);
+
   return (
     <>
+      <Modal
+        open={isOpenModal}
+        onClose={() => setIsOpenModal(false)}
+        title="Edit Profile"
+        callback={callbackforModal}
+        Icon={CloseIcon}
+        ButtonText="Save"
+      >
+        <DropzoneArea
+          dropzoneText="Update Wallpaper"
+          onChange={onSelectWallpaper}
+        />
+        <Divider />
+        <DropzoneArea
+          dropzoneText="Update Profile Photo"
+          onChange={onSelectFile}
+        />
+        ;
+      </Modal>
+
       <div className="userProfile">
         <div
           className="userProfile__theme"
@@ -70,7 +145,12 @@ const ProfileTheme = () => {
           <div className="userProfile__actions">
             <div className="moreWrapper">
               {isMe ? (
-                <div className="followWrapper">Edit Profile</div>
+                <div
+                  className="followWrapper"
+                  onClick={() => setIsOpenModal(true)}
+                >
+                  Edit Profile
+                </div>
               ) : isFollowing ? (
                 <div
                   className="followWrapper"
@@ -119,7 +199,8 @@ const ProfileTheme = () => {
             </Link>
             <Link to={`/profile/${username}/followinfo`}>
               <span>
-                {profile !== undefined && profile.followers.length}<p>Followers</p>
+                {profile !== undefined && profile.followers.length}
+                <p>Followers</p>
               </span>
             </Link>
           </div>
