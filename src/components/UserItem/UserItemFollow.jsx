@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, Button , ButtonBase } from "@material-ui/core";
+import { Avatar, Button} from "@material-ui/core";
 import "./UserItemFollow.css";
 import { useStateValue } from "../../contexts/StateContextProvider";
 import { unfollow, follow } from "../../server/serverActions";
