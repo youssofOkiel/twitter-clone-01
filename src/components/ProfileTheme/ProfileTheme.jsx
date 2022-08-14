@@ -90,7 +90,6 @@ const ProfileTheme = () => {
           console.log("res", res);
           db.collection("users").doc(user.id).update({
             photoURL: res,
-            wallpaper: res,
           });
           console.log("res", res);
           console.log("updated");
@@ -127,11 +126,11 @@ const ProfileTheme = () => {
       <div className="userProfile">
         <div
           className="userProfile__theme"
-          style={{ backgroundImage: `url(${profile && profile.wallpaper})` }}
+          style={{ backgroundImage: `url(${profile && profile.wallpaper})`, backgroundSize:"100% 100%" }}
         >
           <div className="photoWrapper">
             {profile.photoURL !== "" ? (
-              <img src={profile.photoURL} alt={`${profile.displayName}`} />
+              <img src={profile.photoURL} alt={`${profile.displayName}`}  />
             ) : (
               <Avatar
                 style={{ width: "14rem", height: "14rem" }}
