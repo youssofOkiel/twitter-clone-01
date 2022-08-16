@@ -7,26 +7,27 @@ import UserItemFollow from "../UserItem/UserItemFollow";
 const Search = () => {
   const [searchName, setSearchName] = useState("");
   const [users, setUsers] = useState([]);
+  const profile = localStorage.getItem("twitter_user");
 
   const getname = (e) => {
     setSearchName(e.target.value);
-    console.log(searchName);
   };
 
   useEffect(() => {
-    db.collection("users")
-      .where("displayName", "==", searchName)
-      .onSnapshot((snapshot) => {
-        setUsers(
-          snapshot.docs.map((user) => ({
-            id: user.id,
-            ...user.data(),
-          }))
-        );
-      });
+    if (searchName !== "") {
+      db.collection("users")
+        .where("displayName", ">=", searchName)
+        .limit(3)
+        .onSnapshot((snapshot) => {
+          setUsers(
+            snapshot.docs.map((user) => ({
+              id: user.id,
+              ...user.data(),
+            }))
+          );
+        });
+    }
   }, [searchName]);
-
-  
 
   return (
     <>
@@ -35,10 +36,13 @@ const Search = () => {
           InputLabelProps={{ style: { fontSize: 13 } }}
           placeholder="search"
           size="small"
-          InputProps={{ style: { fontSize: 13 , borderRadius:'2rem' } }}
+          InputProps={{ style: { fontSize: 13, borderRadius: "2rem" } }}
           fullWidth
           value={searchName}
           onChange={(e) => getname(e)}
+          onEmptied={() => {
+            setSearchName("");
+          }}
           variant="outlined"
           id="fullWidth"
         />
@@ -46,7 +50,11 @@ const Search = () => {
       <div className="users_container">
         {users.length > 0 &&
           users.map((user) => {
-            return <UserItemFollow display={user} />;
+            if (searchName !== "") {
+              if (user.displayName !== JSON.parse(profile).displayName) {
+                return <UserItemFollow display={user} />;
+              }
+            }
           })}
       </div>
     </>
