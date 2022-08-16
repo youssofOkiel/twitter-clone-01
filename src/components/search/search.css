@@ -1,0 +1,10 @@
+.search_container{
+    margin: 1rem 1rem 1.5rem 2rem;
+    background-color: var(--twitter-background-2);
+    border-radius: 2rem;
+}
+.users_container{
+    margin: .7rem 1rem 1.5rem 2rem;
+    background-color: var(--twitter-background-2);
+    border-radius: 2rem;
+}
