@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./search.css";
 import db from "../../firebase";
 import UserItemFollow from "../UserItem/UserItemFollow";
+import { useStateValue } from "../../contexts/StateContextProvider";
 
 const Search = () => {
   const [searchName, setSearchName] = useState("");
@@ -14,19 +15,16 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (searchName !== "") {
-      db.collection("users")
-        .where("displayName", ">=", searchName)
-        .limit(3)
-        .onSnapshot((snapshot) => {
-          setUsers(
-            snapshot.docs.map((user) => ({
-              id: user.id,
-              ...user.data(),
-            }))
-          );
-        });
-    }
+    db.collection("users")
+      .where("displayName", "==", searchName)
+      .onSnapshot((snapshot) => {
+        setUsers(
+          snapshot.docs.map((user) => ({
+            id: user.id,
+            ...user.data(),
+          }))
+        );
+      });
   }, [searchName]);
 
   return (
@@ -50,11 +48,7 @@ const Search = () => {
       <div className="users_container">
         {users.length > 0 &&
           users.map((user) => {
-            if (searchName !== "") {
-              if (user.displayName !== JSON.parse(profile).displayName) {
-                return <UserItemFollow display={user} />;
-              }
-            }
+            return <UserItemFollow display={user} />;
           })}
       </div>
     </>
