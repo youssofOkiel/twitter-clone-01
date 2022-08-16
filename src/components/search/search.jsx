@@ -15,9 +15,9 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (searchName != "") {
+    if (searchName !== "") {
       db.collection("users")
-        .where("displayName", ">", searchName)
+        .where("displayName", ">=", searchName)
         .limit(3)
         .onSnapshot((snapshot) => {
           setUsers(
@@ -51,8 +51,8 @@ const Search = () => {
       <div className="users_container">
         {users.length > 0 &&
           users.map((user) => {
-            if (searchName != "") {
-              if (user.displayName != JSON.parse(profile).displayName) {
+            if (searchName !== "") {
+              if (user.displayName !== JSON.parse(profile).displayName) {
                 return <UserItemFollow display={user} />;
               }
             }
