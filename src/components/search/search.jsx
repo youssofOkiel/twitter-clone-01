@@ -15,16 +15,19 @@ const Search = () => {
   };
 
   useEffect(() => {
-    db.collection("users")
-      .where("displayName", "==", searchName)
-      .onSnapshot((snapshot) => {
-        setUsers(
-          snapshot.docs.map((user) => ({
-            id: user.id,
-            ...user.data(),
-          }))
-        );
-      });
+    if (searchName !== "") {
+      db.collection("users")
+        .where("displayName", ">=", searchName)
+        .limit(3)
+        .onSnapshot((snapshot) => {
+          setUsers(
+            snapshot.docs.map((user) => ({
+              id: user.id,
+              ...user.data(),
+            }))
+          );
+        });
+    }
   }, [searchName]);
 
   return (
@@ -48,7 +51,11 @@ const Search = () => {
       <div className="users_container">
         {users.length > 0 &&
           users.map((user) => {
-            return <UserItemFollow display={user} />;
+            if (searchName !== "") {
+              if (user.displayName !== JSON.parse(profile).displayName) {
+                return <UserItemFollow display={user} />;
+              }
+            }
           })}
       </div>
     </>
