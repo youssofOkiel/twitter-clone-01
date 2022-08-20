@@ -43,7 +43,7 @@ const Feed = () => {
           console.log(error);
         }
       );
-  });
+  },[]);
 
   return (
     <div className="feed">

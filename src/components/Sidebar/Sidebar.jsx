@@ -20,12 +20,8 @@ const Sidebar = () => {
 
       <SidebarOption text="Home" Icon={HomeIcon} />
       <SidebarOption text="Explore" Icon={SearchIcon} />
-      <SidebarOption text="Notifications" Icon={NotificationsNoneIcon} />
-      <SidebarOption text="Messages" Icon={MailOutlineIcon} />
-      <SidebarOption text="Bookmarks" Icon={BookmarkBorderIcon} />
-      <SidebarOption text="List" Icon={ListAltIcon} />
       <SidebarOption text="Profile" Icon={PermIdentityIcon} />
-      <SidebarOption text="More" Icon={MoreHorizIcon} />
+
 
       <button variant="outlined" className="sidebar__tweet">
         <Link to="/">

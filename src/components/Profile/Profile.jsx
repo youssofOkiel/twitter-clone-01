@@ -72,21 +72,6 @@ const Profile = () => {
         </>
       ),
     },
-
-    {
-      id: 1,
-      title: "Likes",
-      item: (
-        <>
-          {" "}
-          {loading && (
-            <div className="feed__loader">
-              <Loader />
-            </div>
-          )}{" "}
-        </>
-      ),
-    },
   ];
 
   return (
