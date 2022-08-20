@@ -22,7 +22,6 @@ const Sidebar = () => {
       <SidebarOption text="Explore" Icon={SearchIcon} />
       <SidebarOption text="Profile" Icon={PermIdentityIcon} />
 
-
       <button variant="outlined" className="sidebar__tweet">
         <Link to="/">
           <div
@@ -31,7 +30,7 @@ const Sidebar = () => {
           >
             <svg
               viewBox="0 0 27 27"
-              style={{padding: "5px"}}
+              style={{ padding: "5px" }}
               fill="#ffffff"
               className="r-jwli3a r-4qtqp9 r-yyyyoo r-1q142lx r-50lct3 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue"
             >
@@ -41,7 +40,7 @@ const Sidebar = () => {
             </svg>
             <span className="css-901oao css-16my406 css-bfa6kz r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0"></span>
           </div>
-          <span>Tweet</span>
+          <span style={{ color: "white" }}>Tweet</span>
         </Link>
       </button>
 

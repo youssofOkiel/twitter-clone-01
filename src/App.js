@@ -9,6 +9,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Widgets from "./components/Widgets/Widgets";
 import Profile from "./components/Profile/Profile";
 import ProfileFollow from "./components/ProfileFollow/ProfileFollow";
+import Explore from "./components/Explore/Expolre";
 
 const App = () => {
   const [{ user }, dispatch] = useStateValue();
@@ -27,6 +28,7 @@ const App = () => {
           <div className="app__mainContent">
             <Sidebar />
             <Route path="/" exact component={Feed} />
+            <Route path="/explore" exact component={Explore} />
             <Route path="/profile/:username">
               <div className="app__main">
                 <Switch>
